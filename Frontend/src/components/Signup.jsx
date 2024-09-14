@@ -1,5 +1,5 @@
 import React from "react";
-import './Signupcss.css';
+import './Signupcss.css' // Import the external CSS file
 
 function Signup() {
   return (
@@ -25,7 +25,7 @@ function Signup() {
           <input type="submit" value="Sign Up" />
         </div>
         <div className="links flex justify-between">
-          <p style={{color:"white" }}>Already a user? <span className="text-blue-500 underline cursor-pointer ml-1" >Login</span></p>
+          <p style={{color:"white", fontWeight: "bold" }}>Already a user?</p>
           <a className="text-white bg-green-500 px-4 py-3 cursor-pointer rounded-lg">Login</a>
         </div>
       </div>

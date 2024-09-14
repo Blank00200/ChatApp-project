@@ -14,8 +14,8 @@ function App() {
   //     <Right/>
   //   </div>
   // </div>
-  // <Login />
-  <Signup />
+  <Login />
+  // <Signup />
   );
 }
 
