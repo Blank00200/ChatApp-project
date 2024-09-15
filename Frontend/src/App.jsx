@@ -6,17 +6,17 @@ import Signup from "./components/Signup";
 
 function App() {
   return (
-  //   <div class="home" style={{ display: 'flex', height: '100vh'}}>
-  //   <div style={{width: "30%", backgroundColor: "red", color: "#D1D5DB"}}>
-  //     <Left/>
-  //   </div>
-  //   <div style={{width: "70%", backgroundColor: "green", color: "#D1D5DB" }}>
-  //     <Right/>
-  //   </div>
-  // </div>
-  <Login />
-  // <Signup />
+    <div className="home" style={{ display: 'flex', height: '100vh', width: '100vw' }}>
+      <div style={{ flexBasis: "30%", backgroundColor: "red", color: "#D1D5DB" }}>
+        <Left />
+      </div>
+      <div style={{ flexBasis: "70%", backgroundColor: "green", color: "#D1D5DB" }}>
+        <Right />
+      </div>
+    </div>
   );
 }
+  // <Login />
+  // <Signup />
 
 export default App;

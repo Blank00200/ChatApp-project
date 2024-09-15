@@ -1,31 +1,35 @@
 import express from 'express';
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import userRoute from "./routes/user.route.js";
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import userRoute from './routes/user.route.js';
 
 const app = express();
 
-//using to save port and main details
+// Load environment variables
 dotenv.config();
 
-//middleware
-app.use(express.json());
+// Middleware
+app.use(express.json()); // For parsing application/json
 
+app.use(cors());
+
+// MongoDB Connection
 const PORT = process.env.PORT || 3000;
 const URI = process.env.Mongo_URI;
 
-// MongoDB Connection
 mongoose.connect(URI)
-    .then(() => {
-        console.log("Connected to MongoDB");
-    })
-    .catch((error) => {
-        console.error("Error connecting to MongoDB:", error.message);
-    });
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error.message);
+  });
 
-//routes
-app.use("/user", userRoute)
+// Routes
+app.use("/user", userRoute);
 
-//need port to run webside
+// Start server
 app.listen(PORT, () => {
-    console.log('Server is Running on port ${PORT}');})
+  console.log(`Server is Running on port ${PORT}`);
+});
