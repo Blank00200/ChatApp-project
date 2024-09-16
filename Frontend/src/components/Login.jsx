@@ -2,8 +2,12 @@ import React from "react";
 import "./Logincss.css"; // Importing the external CSS file
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useAuth } from "../context/Authprovider";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const [authUser, setAuthUser] = useAuth();
+  const navigate = useNavigate(); // Add navigate hook
   const {
     register,
     handleSubmit,
@@ -16,18 +20,30 @@ function Login() {
       password: data.Password,
     };
 
-    console.log(userInfo);
-
     try {
+      console.log("Sending login request with:", userInfo); // Log request data
+
       const response = await axios.post("http://localhost:3000/user/login", userInfo);
+
+      console.log("Server response:", response.data); // Log server response
+
       if (response.data) {
+        console.log("User logged in successfully");
+
+        // Check if response contains user data or token
+        console.log("User data:", response.data);
+
         alert("Login Successful");
         localStorage.setItem("ChatApp", JSON.stringify(response.data));
+        setAuthUser(response.data);
+        navigate("/"); // Redirect to home or dashboard
       }
     } catch (error) {
       if (error.response) {
+        console.error("Error response:", error.response.data); // Log error response
         alert("Error: " + error.response.data.error);
       } else {
+        console.error("Unexpected error:", error); // Log unexpected error
         alert("An unexpected error occurred");
       }
     }
@@ -74,7 +90,10 @@ function Login() {
 
           <div className="links flex justify-between">
             <p style={{ color: "white", fontWeight: "bold" }}>New user?</p>
-            <a className="text-white bg-green-500 px-4 py-3 cursor-pointer rounded-lg">
+            <a 
+              className="text-white bg-green-500 px-4 py-3 cursor-pointer rounded-lg" 
+              href="/signup"
+            >
               Signup
             </a>
           </div>

@@ -2,8 +2,10 @@ import React from "react";
 import "./Signupcss.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useAuth } from "../context/Authprovider";
 
 function Signup() {
+  const [authUser, setAuthUser] = useAuth()
   const {
     register,
     handleSubmit,
@@ -27,15 +29,16 @@ function Signup() {
       confirmPassword: data.ConfirmPassword,
     };
 
-    console.log(userInfo);
+    // console.log(userInfo);
 
-    axios
+    await axios
       .post("http://localhost:3000/user/signup", userInfo)
       .then((response) => {
         if (response.data) {
           alert("Signup Successful");
         }
         localStorage.setItem("ChatApp",JSON.stringify(response.data));
+        setAuthUser(response.data);
       })
       .catch((error) => {
         if (error.response) {
