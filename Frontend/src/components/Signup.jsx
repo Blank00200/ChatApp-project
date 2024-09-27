@@ -3,6 +3,7 @@ import "./Signupcss.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAuth } from "../context/Authprovider";
+import { Link } from "react-router-dom";
 
 function Signup() {
   const [authUser, setAuthUser] = useAuth()
@@ -32,7 +33,7 @@ function Signup() {
     // console.log(userInfo);
 
     await axios
-      .post("http://localhost:3000/user/signup", userInfo)
+      .post("/api/user/signup", userInfo)
       .then((response) => {
         if (response.data) {
           alert("Signup Successful");
@@ -123,9 +124,9 @@ function Signup() {
             <p style={{ color: "white", fontWeight: "bold" }}>
               Already a user?
             </p>
-            <a className="text-white bg-green-500 px-4 py-3 cursor-pointer rounded-lg">
+            <Link to="/login" className="text-white bg-green-500 px-4 py-3 cursor-pointer rounded-lg">
               Login
-            </a>
+            </Link>
           </div>
         </div>
       </div>

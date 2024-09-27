@@ -3,7 +3,7 @@ import "./Logincss.css"; // Importing the external CSS file
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAuth } from "../context/Authprovider";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const [authUser, setAuthUser] = useAuth();
@@ -23,7 +23,7 @@ function Login() {
     try {
       console.log("Sending login request with:", userInfo); // Log request data
 
-      const response = await axios.post("http://localhost:3000/user/login", userInfo);
+      const response = await axios.post("/api/user/login", userInfo);
 
       console.log("Server response:", response.data); // Log server response
 
@@ -90,12 +90,12 @@ function Login() {
 
           <div className="links flex justify-between">
             <p style={{ color: "white", fontWeight: "bold" }}>New user?</p>
-            <a 
-              className="text-white bg-green-500 px-4 py-3 cursor-pointer rounded-lg" 
+
+            <Link to="/signup" className="text-white bg-green-500 px-4 py-3 cursor-pointer rounded-lg" 
               href="/signup"
             >
               Signup
-            </a>
+            </Link>
           </div>
         </div>
       </div>
