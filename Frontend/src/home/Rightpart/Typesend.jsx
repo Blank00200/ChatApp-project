@@ -1,17 +1,36 @@
-import React from 'react'
-import { RiSendPlaneFill } from "react-icons/ri";
+import React, { useState } from "react";
+import { IoSend } from "react-icons/io5";
+import useSendMessage from "../../context/useSendMessage.js";
 
 function Typesend() {
+  const [message, setMessage] = useState("");
+  const { loading, sendMessages } = useSendMessage();
+
+  const handleSubmit = async (e) => {
+    console.log(e);
+    e.preventDefault();
+    await sendMessages(message);
+    setMessage("");
+  };
+
   return (
-    <div className="flex space-x-1 h-[8vh] bg-gray-800">
-        <div className="w-[70%] mx-4">
-        <input type="text" placeholder="Type here" className="border border-gray-700 outline-none rounded-xl mt-3 px-4 py-3 w-full" />
+    <form onSubmit={handleSubmit}>
+      <div className="flex space-x-1 h-[8vh]  bg-gray-800">
+        <div className=" w-[70%] mx-4">
+          <input
+            type="text"
+            placeholder="Type here"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="border border-gray-700 rounded-xl outline-none mt-1 px-4 py-3 w-full"
+          />
         </div>
         <button>
-        <RiSendPlaneFill className="text-4xl mb-1" />
+          <IoSend className="text-3xl" />
         </button>
-    </div>
-  )
+      </div>
+    </form>
+  );
 }
 
-export default Typesend
+export default Typesend;
