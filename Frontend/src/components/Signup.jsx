@@ -6,7 +6,7 @@ import { useAuth } from "../context/Authprovider";
 import { Link } from "react-router-dom";
 
 function Signup() {
-  const [authUser, setAuthUser] = useAuth()
+  const [authUser, setAuthUser] = useAuth();
   const {
     register,
     handleSubmit,
@@ -24,13 +24,11 @@ function Signup() {
 
   const onSubmit = async (data) => {
     const userInfo = {
-      fullname: data.Username, // Ensure this matches your server's field names
+      fullname: data.Username,
       email: data.Email,
       password: data.Password,
       confirmPassword: data.ConfirmPassword,
     };
-
-    // console.log(userInfo);
 
     await axios
       .post("/api/user/signup", userInfo)
@@ -38,7 +36,7 @@ function Signup() {
         if (response.data) {
           alert("Signup Successful");
         }
-        localStorage.setItem("ChatApp",JSON.stringify(response.data));
+        localStorage.setItem("ChatApp", JSON.stringify(response.data));
         setAuthUser(response.data);
       })
       .catch((error) => {
@@ -62,11 +60,18 @@ function Signup() {
             <input
               type="text"
               placeholder="Username"
-              {...register("Username", { required: true })}
+              {...register("Username", {
+                required: "Username is required",
+                pattern: {
+                  value: /^[A-Za-z][A-Za-z0-9_]*$/,
+                  message:
+                    "Username must start with a letter and can contain letters, numbers, or underscores",
+                },
+              })}
             />
             {errors.Username && (
               <span className="text-red-600 text-sm font-semibold">
-                This field is required
+                {errors.Username.message}
               </span>
             )}
           </div>
@@ -76,11 +81,17 @@ function Signup() {
             <input
               type="text"
               placeholder="Email"
-              {...register("Email", { required: true })}
+              {...register("Email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[com]{3}$/,
+                  message: "Email must end with .com",
+                },
+              })}
             />
             {errors.Email && (
               <span className="text-red-600 text-sm font-semibold">
-                This field is required
+                {errors.Email.message}
               </span>
             )}
           </div>
@@ -124,7 +135,10 @@ function Signup() {
             <p style={{ color: "white", fontWeight: "bold" }}>
               Already a user?
             </p>
-            <Link to="/login" className="text-white bg-green-500 px-4 py-3 cursor-pointer rounded-lg">
+            <Link
+              to="/login"
+              className="text-white bg-green-500 px-4 py-3 cursor-pointer rounded-lg"
+            >
               Login
             </Link>
           </div>

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-function Message({ message }) {
+const Message = forwardRef(({ message }, ref) => {
   const authUser = JSON.parse(localStorage.getItem("ChatApp"));
   const itsMe = message.senderId === authUser.user._id;
   
@@ -8,16 +8,14 @@ function Message({ message }) {
   const chatColor = itsMe ? "bg-blue-500" : "";
 
   return (
-    <div>
-      <div className="p-4">
-        <div className={`chat ${chatName}`}>
-          <div className={`chat-bubble text-white ${chatColor}`}>
-            {message.message}
-          </div>
+    <div ref={ref} className="p-4">
+      <div className={`chat ${chatName}`}>
+        <div className={`chat-bubble text-white ${chatColor}`}>
+          {message.message}
         </div>
       </div>
     </div>
   );
-}
+});
 
 export default Message;

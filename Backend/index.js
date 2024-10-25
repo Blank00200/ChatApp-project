@@ -6,6 +6,7 @@ import userRoute from './routes/user.route.js';
 import messageRoute from './routes/message.route.js';
 import cookieParser from 'cookie-parser';
 
+// Initialize Express app
 const app = express();
 
 // Load environment variables
@@ -35,4 +36,10 @@ app.use("/api/message", messageRoute);
 // Start server
 app.listen(PORT, () => {
   console.log(`Server is Running on port ${PORT}`);
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
