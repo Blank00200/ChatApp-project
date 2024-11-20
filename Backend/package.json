@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "npx sudo nodemon index.js",
+    "start": "node index.js",
     "build": "npm install && npm install -g nodemon && (cd Frontend && npm install && npm run build)"
   },
   "keywords": [
@@ -22,7 +22,6 @@
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.2",
-    "nodemon": "^3.1.7",
     "socket.io": "^4.8.0"
   }
 }
