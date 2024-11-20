@@ -4,7 +4,7 @@ import Left from "./home/Leftpart/Left";
 import Right from "./home/Rightpart/Right";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import { useAuth } from "./context/Authprovider";
+import { useAuth } from "./context/AuthProvider.jsx";
 
 function App() {
   const [authUser] = useAuth();  // Assuming useAuth returns an array with authUser

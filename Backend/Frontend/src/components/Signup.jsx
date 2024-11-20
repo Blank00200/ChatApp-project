@@ -2,7 +2,7 @@ import React from "react";
 import "./Signupcss.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useAuth } from "../context/Authprovider";
+import { useAuth } from "../context/AuthProvider";
 import { Link } from "react-router-dom";
 
 function Signup() {
@@ -65,7 +65,7 @@ function Signup() {
                 pattern: {
                   value: /^[A-Za-z][A-Za-z0-9_]*$/,
                   message:
-                    "Username must start with a letter and can contain letters, numbers, or underscores",
+                    "Username must start with a letter and can only contain letters, numbers, or underscores. It cannot start with a number, underscore, or special characters.",
                 },
               })}
             />
@@ -101,7 +101,19 @@ function Signup() {
             <input
               type="password"
               placeholder="Password"
-              {...register("Password", { required: "Password is required" })}
+              {...register("Password", {
+                required: "Password is required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters long",
+                },
+                pattern: {
+                  value:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                  message:
+                    "Password must contain 8 letters and has at least one uppercase letter, one lowercase letter, one number, and one special character",
+                },
+              })}
             />
             {errors.Password && (
               <span className="text-red-600 text-sm font-semibold">

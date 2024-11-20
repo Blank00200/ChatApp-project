@@ -1,26 +1,27 @@
 import mongoose from "mongoose";
-import User from "../models/user.model.js"
+import User from "../models/user.model.js";
 import Message from "./message.model.js";
 
-const conversationSchema = new mongoose.Schema ( {
-
+const conversationSchema = new mongoose.Schema(
+  {
     members: [
-
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: User
-        }
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', // Reference to User model
+        required: true, // Ensuring members are required
+      },
     ],
     messages: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: Message,
-            default:[]
-        }
-    ]
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Message', // Reference to Message model
+        default: [],
+      },
+    ],
   },
-  { timestamps: true } 
-)
+  { timestamps: true } // Automatically adds createdAt and updatedAt fields
+);
 
-const Conversation = mongoose.model("conversation", conversationSchema)
+const Conversation = mongoose.model("Conversation", conversationSchema); // Consistent capitalization
+
 export default Conversation;

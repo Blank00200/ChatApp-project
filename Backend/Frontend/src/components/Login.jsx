@@ -2,7 +2,7 @@ import React from "react";
 import "./Logincss.css"; // Importing the external CSS file
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useAuth } from "../context/Authprovider";
+import { useAuth } from "../context/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
