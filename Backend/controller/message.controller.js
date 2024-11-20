@@ -22,7 +22,13 @@ export const sendMessage = async (req, res) => {
         }
 
         // Encrypt the message content
-        const { iv, encryptedData } = encrypt(message);
+        let iv, encryptedData;
+        try {
+            ({ iv, encryptedData } = encrypt(message));
+        } catch (error) {
+            console.error("Error in encrypting message", error);
+            return res.status(500).json({ error: "Error encrypting message" });
+        }
 
         // Create a new encrypted message
         const newMessage = new Message({
@@ -58,7 +64,7 @@ export const getMessage = async (req, res) => {
         }).populate("messages"); // Populate the messages field with message data
 
         // If no conversation exists, return an empty array
-        if (!conversation) {
+        if (!conversation || !conversation.messages || conversation.messages.length === 0) {
             return res.status(200).json([]);
         }
 
