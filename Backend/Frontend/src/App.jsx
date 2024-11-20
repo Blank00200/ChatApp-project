@@ -17,10 +17,10 @@ function App() {
         path="/" 
         element={authUser ? (
           <div className="home" style={{ display: 'flex', height: '100vh', width: '100vw' }}>
-            <div style={{ flexBasis: "30%", backgroundColor: "red", color: "#D1D5DB" }}>
+            <div style={{ flexBasis: "30%", backgroundColor: "black", color: "#D1D5DB" }}>
               <Left />
             </div>
-            <div style={{ flexBasis: "70%", backgroundColor: "green", color: "#D1D5DB" }}>
+            <div style={{ flexBasis: "70%", backgroundColor: "gray", color: "#D1D5DB" }}>
               <Right />
             </div>
           </div>
