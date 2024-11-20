@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node_modules/.bin/nodemon index.js",
+    "start": "npx sudo nodemon index.js",
     "build": "npm install && npm install -g nodemon && (cd Frontend && npm install && npm run build)"
   },
   "keywords": [
