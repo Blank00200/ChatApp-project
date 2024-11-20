@@ -5,10 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-  "dev": "nodemon index.js",
-  "start": "npx nodemon index.js",
-  "build": "npm install && (cd Frontend && npm install && npm run build)"
-},
+    "dev": "nodemon index.js",
+    "start": "node_modules/.bin/nodemon index.js",
+    "build": "npm install && npm install -g nodemon && (cd Frontend && npm install && npm run build)"
+  },
   "keywords": [
     "MERN"
   ],
