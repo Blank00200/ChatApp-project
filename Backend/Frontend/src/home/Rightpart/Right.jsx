@@ -17,14 +17,17 @@ function Right() {
   }, [selectedConversation]);
 
   return (
-    <div className="w-full bg-slate-900 text-gray-300 min-h-screen"> {/* Ensure min-height covers the screen */}
+    <div className="w-full bg-slate-900 text-gray-300">
       <div>
         {!selectedConversation ? (
           <NoChatSelected />
         ) : (
           <>
             <Chatuser />
-            <div className="flex-1 overflow-y-auto" style={{ maxHeight: "calc(92vh - 8vh)" }}>
+            <div
+              className=" flex-1 overflow-y-auto"
+              style={{ maxHeight: "calc(92vh - 8vh)" }}
+            >
               <Messages />
             </div>
             <Typesend />
@@ -50,7 +53,9 @@ const NoChatSelected = () => {
       <div className="flex h-screen items-center justify-center">
         <h1 className="text-center">
           Welcome{" "}
-          <span className="font-semibold text-xl">{authUser.user.fullname}</span>
+          <span className="font-semibold text-xl">
+            {authUser.user.fullname}
+          </span>
           <br />
           No chat selected, please start conversation by selecting anyone to
           your contacts
