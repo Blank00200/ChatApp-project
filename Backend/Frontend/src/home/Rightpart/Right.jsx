@@ -9,22 +9,30 @@ import { CiMenuFries } from "react-icons/ci";
 function Right() {
   const { selectedConversation, setSelectedConversation } = useConversation();
 
-  // Ensure selectedConversation is properly set when a user is selected
+  // Reset selectedConversation on component unmount
+  useEffect(() => {
+    return () => setSelectedConversation(null);
+  }, [setSelectedConversation]);
+
+  // Additional effect to handle changes to selectedConversation
   useEffect(() => {
     if (!selectedConversation) {
-      // You might want to reset the conversation state here if necessary
+      // Additional logic can be added here if required
     }
   }, [selectedConversation]);
 
   return (
-    <div className="w-full bg-slate-900 text-gray-300 min-h-screen"> {/* Ensure min-height covers the screen */}
+    <div className="w-full bg-slate-900 text-gray-300 min-h-screen">
       <div>
         {!selectedConversation ? (
           <NoChatSelected />
         ) : (
           <>
             <Chatuser />
-            <div className="flex-1 overflow-y-auto" style={{ maxHeight: "calc(92vh - 8vh)" }}>
+            <div
+              className="flex-1 overflow-y-auto"
+              style={{ maxHeight: "calc(92vh - 8vh)" }}
+            >
               <Messages />
             </div>
             <Typesend />
@@ -52,8 +60,8 @@ const NoChatSelected = () => {
           Welcome{" "}
           <span className="font-semibold text-xl">{authUser.user.fullname}</span>
           <br />
-          No chat selected, please start conversation by selecting anyone to
-          your contacts
+          No chat selected, please start a conversation by selecting anyone from
+          your contacts.
         </h1>
       </div>
     </div>
