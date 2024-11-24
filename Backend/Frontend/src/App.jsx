@@ -17,28 +17,36 @@ function App() {
         path="/"
         element={
           authUser ? (
-            // <div className="flex h-screen">
-            //   <Left />
-            //   <Right />
-            // </div>
-            <div className="drawer lg:drawer-open">
+            <div className="flex flex-col lg:flex-row h-screen">
+              {/* Drawer for mobile and tablet views */}
               <input
                 id="my-drawer-2"
                 type="checkbox"
-                className="drawer-toggle"
+                className="drawer-toggle hidden lg:block"
               />
-              <div className="drawer-content flex flex-col items-center justify-center">
+              <div className="drawer-content flex flex-col lg:hidden">
+                {/* Drawer Button for smaller screens */}
+                <label
+                  htmlFor="my-drawer-2"
+                  aria-label="open sidebar"
+                  className="btn btn-ghost absolute top-4 left-4 lg:hidden"
+                >
+                  Open Menu
+                </label>
                 <Right />
               </div>
-              <div className="drawer-side">
+              <div className="drawer-side lg:w-1/3 bg-black text-gray-300">
                 <label
                   htmlFor="my-drawer-2"
                   aria-label="close sidebar"
                   className="drawer-overlay"
                 ></label>
-                <ul className="menu w-80 min-h-full bg-black text-base-content">
+                <ul className="menu w-full min-h-full lg:pt-4">
                   <Left />
                 </ul>
+              </div>
+              <div className="hidden lg:flex lg:flex-grow">
+                <Right />
               </div>
             </div>
           ) : (
