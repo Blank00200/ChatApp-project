@@ -7,14 +7,17 @@ import { useAuth } from "../../context/AuthProvider.jsx";
 import { CiMenuFries } from "react-icons/ci";
 
 function Right() {
-  const { selectedConversation } = useConversation();
+  const { selectedConversation, setSelectedConversation } = useConversation();
 
+  // Ensure selectedConversation is properly set when a user is selected
   useEffect(() => {
-    console.log("Selected Conversation:", selectedConversation);
+    if (!selectedConversation) {
+      // You might want to reset the conversation state here if necessary
+    }
   }, [selectedConversation]);
 
   return (
-    <div className="w-full bg-slate-900 text-gray-300 min-h-screen">
+    <div className="w-full bg-slate-900 text-gray-300">
       <div>
         {!selectedConversation ? (
           <NoChatSelected />
@@ -22,7 +25,7 @@ function Right() {
           <>
             <Chatuser />
             <div
-              className="flex-1 overflow-y-auto"
+              className=" flex-1 overflow-y-auto"
               style={{ maxHeight: "calc(92vh - 8vh)" }}
             >
               <Messages />
@@ -51,10 +54,11 @@ const NoChatSelected = () => {
         <h1 className="text-center">
           Welcome{" "}
           <span className="font-semibold text-xl">
-            {authUser?.user?.fullname || "Guest"}
+            {authUser.user.fullname}
           </span>
           <br />
-          No chat selected, please start a conversation by selecting a contact.
+          No chat selected, please start conversation by selecting anyone to
+          your contacts
         </h1>
       </div>
     </div>
